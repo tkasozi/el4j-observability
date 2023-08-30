@@ -1,0 +1,266 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'org.springframework.boot' version '3.1.2'
+    id 'java-library'
+    id 'maven-publish'
+    id 'checkstyle'
+    id 'pmd' // performs quality checks on your project's Java source files using PMD and generates reports from these checks
+    id 'jacoco'
+    id 'com.github.spotbugs' version '5.1.0'
+    id 'at.zierler.yamlvalidator' version '1.5.0'
+    id 'nebula.lint' version '18.1.0'
+    id 'nu.studer.credentials' version '3.0'
+    id 'io.freefair.lombok' version '8.1.0'
+    id 'name.remal.sonarlint' version '3.3.5'
+}
+
+group = 'org.el4j.observability'
+version = "${System.env.BUILD_VERSION?:'0.0.1-SNAPSHOT'}"
+description = 'el4j-observability'
+
+sourceCompatibility = '17'
+
+repositories {
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    mavenLocal()
+}
+
+configurations {
+    bom
+    annotationProcessor {
+        extendsFrom bom
+    }
+    implementation {
+        extendsFrom bom
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+dependencies {
+    bom platform(SpringBootPlugin.BOM_COORDINATES)
+
+    compileOnly 'org.springframework.data:spring-data-commons'
+    compileOnly 'org.springframework.boot:spring-boot-starter-actuator'
+    compileOnly 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
+    compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
+    compileOnly 'org.springframework.data:spring-data-jpa'
+    compileOnly 'org.springframework.data:spring-data-redis'
+    compileOnly 'org.springframework:spring-core'
+    compileOnly 'org.springframework:spring-context'
+    compileOnly 'org.springframework:spring-context-support'
+    compileOnly 'org.springframework.boot:spring-boot-starter-aop'
+    compileOnly 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.boot:spring-boot-starter-webflux'
+    compileOnly 'org.springframework.boot:spring-boot-starter-validation'
+
+    compileOnly 'org.apache.maven:maven-plugin-api:3.9.3'
+    compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0'
+    compileOnly 'org.apache.maven:maven-project:2.2.1'
+
+    compileOnly 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    compileOnly 'org.slf4j:log4j-over-slf4j:2.0.7'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test'){
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testImplementation('org.signal:embedded-redis:0.8.3'){
+        exclude group: 'com.google.guava', module: 'guava' // because: "using version 29.0-jre which has CVE-2020-8908 vulnerability"
+    }
+    testImplementation 'com.google.guava:guava:31.1-jre'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
+    testImplementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.boot:spring-boot-autoconfigure'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    testImplementation 'org.springframework:spring-core'
+    testImplementation 'org.springframework:spring-context'
+    testImplementation 'org.springframework:spring-context-support'
+    testImplementation 'org.springframework.boot:spring-boot-starter-aop'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+    testImplementation 'org.springframework.data:spring-data-redis'
+
+    testImplementation 'org.apache.maven:maven-plugin-api:3.9.3'
+    testImplementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0'
+    testImplementation 'org.apache.maven:maven-project:2.2.1'
+
+    testImplementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags "integration"
+    }
+    finalizedBy jacocoTestReport
+}
+
+task integrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "integration"
+    }
+    finalizedBy jacocoTestReport
+}
+
+check {
+    dependsOn jacocoTestCoverageVerification
+}
+
+gradleLint {
+    // 'unused-exclude-by-dep' doesn't work with BOM dependency management: https://github.com/nebula-plugins/gradle-lint-plugin/issues/224
+    rules  = ['archaic-wrapper']
+    criticalRules = ['dependency-parentheses', 'overridden-dependency-version'] // <-- this will fail the build in the event of a violation
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            excludes = ['time']
+        }
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+    manifest {
+        attributes("Implementation-Version": version)
+        attributes("Implementation-Title": project.name)
+    }
+}
+
+// reproducible builds, see https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives
+tasks.withType(AbstractArchiveTask) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Event logging and observability'
+                description = 'Implements logging, tracing, and metrics'
+//                url = 'http://www.example.com/library'
+//                properties = [
+//                        myProp: "value",
+//                        "prop.with.dots": "anotherValue"
+//                ]
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'talikk'
+                        name = 'Talik Kasozi'
+                        email = 'talik.aziizi@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/el4j.git'
+                    developerConnection = 'scm:git:ssh://github.com/el4j.git'
+                    url = 'https://github.com/tkasozi/el4j.git'
+                }
+            }
+        }
+    }
+}
+
+assemble.doLast {
+    project.jar.outputs.allOutputFiles.each { file ->
+        println "artifact_path: " + file
+    }
+}
+
+yamlValidator {
+    searchPaths = ['src/']
+    allowDuplicates = false
+    searchRecursive = true
+}
+
+pmd {
+    ruleSets = []
+    ruleSetConfig = resources.text.fromFile("config/pmd/pmdruleset.xml")
+}
+
+spotbugs {
+    excludeFilter = file("config/spotbugs/exclude.xml")
+}
+
+jacocoTestReport {
+    reports {
+        html.required = true
+        xml.required = true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.60
+            }
+        }
+        failOnViolation true
+    }
+}
+
+spotbugsMain {
+    reports {
+        xml {
+            required.set(false)
+        }
+        html {
+            required.set(true)
+        }
+    }
+}
+
+// Sonar needs access to libraries in order to do analysis
+// in the sec-rel pipeline yaml, set:
+// sonar_java_libraries: "build/sonar-libs/*.jar"
+tasks.register('copySonarLibs', Copy) {
+    from configurations.annotationProcessor
+    into "$buildDir/sonar-libs"
+}
+
+build.finalizedBy copySonarLibs
+
+//get rid of all the build and generated resources file
+clean {
+    delete "${projectDir}/src/main/resources/META-INF/el4j-logger"
+}

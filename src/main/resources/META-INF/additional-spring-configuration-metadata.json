@@ -1,0 +1,73 @@
+{
+  "groups": [
+    {
+      "name": "el4j",
+      "type": "java.lang.Object",
+      "description": "Kessel-run logging configuration."
+    },
+    {
+      "name": "elf4j.metrics",
+      "type": "java.lang.Object",
+      "description": "Basic properties."
+    },
+    {
+      "name": "elf4j.metrics.logging",
+      "type": "org.el4j.observability.property.DefaultLoggingProperties",
+      "description": "logging configuration."
+    },
+    {
+      "name": "elf4j.metrics.logging.extra",
+      "type": "org.el4j.observability.property.ExtraLoggingProperties",
+      "description": "logging configuration."
+    }
+  ],
+  "properties": [
+    {
+      "name": "elf4j.metrics.logging.enabled",
+      "type": "java.lang.Boolean",
+      "description": "logging configuration true/false.",
+      "defaultValue": true
+    },
+    {
+      "name": "elf4j.metrics.logging.exceptions",
+      "type": "java.lang.Boolean",
+      "description": "If true, exception message will be logged.",
+      "defaultValue": true
+    },
+    {
+      "name": "elf4j.metrics.logging.ttl",
+      "type": "java.lang.Long",
+      "description": "Time To Live for the saved log (in seconds). By default, user logs are kept for 1 week = 604800 seconds.",
+      "defaultValue": 604800
+    },
+    {
+      "name": "elf4j.metrics.adminRole",
+      "type": "java.lang.String",
+      "description": "The name of the security role for individuals allowed access to the logs.",
+      "defaultValue": "ADMIN"
+    },
+    {
+      "name": "elf4j.metrics.adminPageName",
+      "type": "java.lang.String",
+      "description": "The name of the page to be displayed as admin page. This will also be the name of the route or endpoint.",
+      "defaultValue": "dashboard"
+    },
+    {
+      "name": "elf4j.metrics.logging.extra.enabled",
+      "type": "java.lang.Boolean",
+      "description": "If true, exception message will be logged.",
+      "defaultValue": false
+    },
+    {
+      "name": "elf4j.metrics.logging.extra.ttl",
+      "type": "java.lang.Long",
+      "description": "By default ttl for system logs is 1 day = 86400 seconds.",
+      "defaultValue": 86400
+    },
+    {
+      "name": "elf4j.metrics.logging.extra.packages",
+      "type": "java.util.List<org.el4j.observability.property.PackageLevelLog>",
+      "description": "logging level defaults to ERROR."
+    }
+  ]
+}
