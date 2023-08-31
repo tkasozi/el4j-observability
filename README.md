@@ -1,10 +1,8 @@
 # Event logging For Java: El4j
 
-## How to "use" -- Setup instructions:
+## Setup instructions:
 
-To add to your project (gradle):
-
-### Local setup
+### Groovy setup example:
 
 ```groovy
 
@@ -17,14 +15,8 @@ dependencies {
 }
 
 ```
-### Add to your application yaml file
 
-```yaml
-
-logging.event.enabled: true # default value true
-
-```
-### Usage in more details:
+### Example using yaml:
 
 ```yaml
 elf4j.metrics.adminRole: admin
@@ -43,7 +35,7 @@ elf4j.metrics.logging.extra.packages:
 
 ```
 
-### Other usage example:
+### Example using properties:
 
 ```properties
 elf4j.metrics.adminRole=admin
