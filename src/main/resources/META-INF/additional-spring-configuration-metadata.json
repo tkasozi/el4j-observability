@@ -3,7 +3,7 @@
     {
       "name": "el4j",
       "type": "java.lang.Object",
-      "description": "Kessel-run logging configuration."
+      "description": "Event logging configuration."
     },
     {
       "name": "elf4j.metrics",

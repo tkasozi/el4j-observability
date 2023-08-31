@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /***
  * Types of events supported.
- * @author tkasozi  Talik. A. Kasozi tkasozi.ctr@kr.af.mil
+ * @author tkasozi  Talik. A. Kasozi talik.aziizi@gmail.com
  */
 @Getter
 public enum MetricsTypeEnum {
