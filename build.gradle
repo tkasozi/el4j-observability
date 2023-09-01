@@ -164,6 +164,7 @@ publishing {
                 username "${System.env.MAVEN_USERNAME}"
                 password "${System.env.MAVEN_PASSWORD}"
             }
+            print("---->> ${System.env.MAVEN_USERNAME}")
         }
 
         maven {
