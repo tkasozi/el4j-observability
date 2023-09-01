@@ -29,7 +29,11 @@ jobs:
       - name: Publish to the Maven Central Repository
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         env:
+          #          staging
           ORG_GRADLE_PROJECT_stagingUsername: ${{ secrets.OSSRH_USERNAME }}
           ORG_GRADLE_PROJECT_stagingPassword: ${{ secrets.OSSRH_TOKEN }}
+          #          snapshots
+          ORG_GRADLE_PROJECT_snapshotsUsername: ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_snapshotsPassword: ${{ secrets.OSSRH_TOKEN }}
         with:
           arguments: publish
