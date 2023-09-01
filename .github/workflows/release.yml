@@ -18,12 +18,12 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-          server-id: ossrh
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-          server-username: ${{ secrets.OSSRH_USERNAME }}
-          server-password: ${{ secrets.OSSRH_TOKEN }}
-          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          gpg-passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#          server-id: ossrh
+#          server-username: ${{ secrets.OSSRH_USERNAME }}
+#          server-password: ${{ secrets.OSSRH_TOKEN }}
+#          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+#          gpg-passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
       - name: build artifact
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         with:
@@ -35,11 +35,9 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
         with:
+          server-id: ossrh
+          server-username: ${{ secrets.OSSRH_USERNAME }}
+          server-password: ${{ secrets.OSSRH_TOKEN }}
+          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          gpg-passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
           arguments: publish
-#        run: |
-#          ./gradlew publish
-#          -MAVEN_USERNAME="$MAVEN_USERNAME"
-#          -MAVEN_PASSWORD="$MAVEN_PASSWORD"
-#
-#          echo "*********************************"
-#          echo "$MAVEN_USERNAME"
