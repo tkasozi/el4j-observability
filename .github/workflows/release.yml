@@ -29,10 +29,17 @@ jobs:
         with:
           arguments: build
       - name: Publish to the Maven Central Repository
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-        with:
-          arguments: publish
+#        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+#        with:
+#          arguments: publish
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        run: |
+          echo "*** $MAVEN_USERNAME"
+          ./gradlew publish
+          -MAVEN_USERNAME=$MAVEN_USERNAME
+          -MAVEN_PASSWORD=$MAVEN_PASSWORD
+          
+          echo "*** $MAVEN_USERNAME"
