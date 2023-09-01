@@ -11,6 +11,8 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v3
         with:
