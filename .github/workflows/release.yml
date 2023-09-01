@@ -1,0 +1,42 @@
+name: release and push to central
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java for publishing to Maven Central Repository
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          server-id: ossrh
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: build artifact
+        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+        with:
+          arguments: build
+      - name: Create release
+        uses: ncipollo/release-action@v3
+        with:
+          allowUpdates: true
+          artifacts: "${{ github.workspace }}/target/*.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to the Maven Central Repository
+        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+        with:
+          arguments: publishing
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
