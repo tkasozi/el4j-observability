@@ -168,7 +168,7 @@ publishing {
 
         maven {
             name 'snapshots'
-            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/"'
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
             credentials {
                 username "${System.env.MAVEN_USERNAME}"
                 password "${System.env.MAVEN_PASSWORD}"
