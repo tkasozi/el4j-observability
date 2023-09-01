@@ -38,7 +38,7 @@ public class ExceptionLoggingAspect {
 	/**
 	 * Pointcut to exclude methods in this library.
 	 */
-	@Pointcut("!within(org.el4j.observability.*)")
+	@Pointcut("!within(com.github.tkasozi.*)")
 	public void excludeOwnMethods() {
 		// empty
 	}
