@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.tkasozi:el4j-observability:0.0.1-SNAPSHOT'
+    implementation 'io.github.tkasozi:el4j-observability:0.0.1-SNAPSHOT'
 }
 
 ```
