@@ -20,6 +20,11 @@ description = 'el4j-observability'
 
 sourceCompatibility = '17'
 
+ext {
+    nexusUsername = System.getenv('MAVEN_USERNAME')
+    nexusPassword = System.getenv('MAVEN_PASSWORD')
+}
+
 repositories {
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
@@ -161,8 +166,8 @@ publishing {
             name 'staging'
             url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
             credentials {
-                username "${System.env.MAVEN_USERNAME}"
-                password "${System.env.MAVEN_PASSWORD}"
+                username nexusUsername
+                password nexusPassword
             }
             println "---**********************************---"
             println "1. ${System.env.GITHUB_REF_NAME}"
@@ -175,8 +180,8 @@ publishing {
             name 'snapshots'
             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
             credentials {
-                username "${System.env.MAVEN_USERNAME}"
-                password "${System.env.MAVEN_PASSWORD}"
+                username nexusUsername
+                password nexusPassword
             }
         }
 
