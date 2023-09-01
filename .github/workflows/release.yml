@@ -30,10 +30,10 @@ jobs:
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         env:
           #          staging
-          ORG_GRADLE_PROJECT_stagingUsername: tkasozi # ${{ secrets.OSSRH_USERNAME }}
-          ORG_GRADLE_PROJECT_stagingPassword: pass # ${{ secrets.OSSRH_TOKEN }}
+          ORG_GRADLE_PROJECT_stagingUsername: h2gKPffA # ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_stagingPassword: 3ropTeYoT31m00xgLmjS/IiafBjtz6pjqJMC2upIznDs # ${{ secrets.OSSRH_TOKEN }}
           #          snapshots
-          ORG_GRADLE_PROJECT_snapshotsUsername: tkasozi # ${{ secrets.OSSRH_USERNAME }}
-          ORG_GRADLE_PROJECT_snapshotsPassword: pass # ${{ secrets.OSSRH_TOKEN }}
+          ORG_GRADLE_PROJECT_snapshotsUsername: h2gKPffA # ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_snapshotsPassword: 3ropTeYoT31m00xgLmjS/IiafBjtz6pjqJMC2upIznDs # ${{ secrets.OSSRH_TOKEN }}
         with:
           arguments: publish
