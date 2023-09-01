@@ -15,7 +15,7 @@ plugins {
 }
 
 group = 'io.github.tkasozi'
-version = "${System.env.BUILD_VERSION?:'0.0.1-SNAPSHOT'}"
+version = "${System.env.GITHUB_REF_NAME?:'0.0.1-SNAPSHOT'}"
 description = 'el4j-observability'
 
 sourceCompatibility = '17'
@@ -165,7 +165,10 @@ publishing {
                 password "${System.env.MAVEN_PASSWORD}"
             }
             println "---**********************************---"
-            println System.getenv()
+            println "1. ${System.env.GITHUB_REF_NAME}"
+            println "2. " + System.getenv("GITHUB_REF_NAME")
+            println "**2. " + System.getenv("MAVEN_USERNAME")
+            println "1. " + System.getenv()
         }
 
         maven {
