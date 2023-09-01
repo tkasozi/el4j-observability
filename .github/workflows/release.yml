@@ -27,7 +27,7 @@ jobs:
         with:
           arguments: build
       - name: Create release
-        uses: ncipollo/release-action@v3
+        uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: "${{ github.workspace }}/target/*.jar"
