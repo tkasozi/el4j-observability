@@ -14,7 +14,7 @@ plugins {
     id 'name.remal.sonarlint' version '3.3.5'
 }
 
-group = 'com.github.tkasozi'
+group = 'io.github.tkasozi'
 version = "${System.env.BUILD_VERSION?:'0.0.1-SNAPSHOT'}"
 description = 'el4j-observability'
 

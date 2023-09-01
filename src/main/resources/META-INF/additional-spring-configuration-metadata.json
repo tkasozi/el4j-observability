@@ -12,12 +12,12 @@
     },
     {
       "name": "elf4j.metrics.logging",
-      "type": "com.github.tkasozi.property.DefaultLoggingProperties",
+      "type": "io.github.tkasozi.property.DefaultLoggingProperties",
       "description": "logging configuration."
     },
     {
       "name": "elf4j.metrics.logging.extra",
-      "type": "com.github.tkasozi.property.ExtraLoggingProperties",
+      "type": "io.github.tkasozi.property.ExtraLoggingProperties",
       "description": "logging configuration."
     }
   ],
@@ -66,7 +66,7 @@
     },
     {
       "name": "elf4j.metrics.logging.extra.packages",
-      "type": "java.util.List<com.github.tkasozi.property.PackageLevelLog>",
+      "type": "java.util.List<io.github.tkasozi.property.PackageLevelLog>",
       "description": "logging level defaults to ERROR."
     }
   ]
