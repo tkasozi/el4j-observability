@@ -165,7 +165,7 @@ publishing {
                 password "${System.env.MAVEN_PASSWORD}"
             }
             println "---**********************************---"
-            println System.getenv('ENVIRONMENTAL')
+            println System.getenv()
         }
 
         maven {
