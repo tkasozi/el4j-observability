@@ -1,8 +1,8 @@
 # AutoConfigureAspectLogging auto-configuration imports
-org.el4j.observability.DefaultAutoConfiguration
-org.el4j.observability.SecurityAutoConfiguration
-org.el4j.observability.AspectAutoConfiguration
-org.el4j.observability.ExtraLoggingAutoConfiguration
-org.el4j.observability.RedisRepositoryAutoConfiguration
-org.el4j.observability.MetricsEndpointAutoConfiguration
-org.el4j.observability.ResourceAutoConfiguration
+com.github.tkasozi.DefaultAutoConfiguration
+com.github.tkasozi.SecurityAutoConfiguration
+com.github.tkasozi.AspectAutoConfiguration
+com.github.tkasozi.ExtraLoggingAutoConfiguration
+com.github.tkasozi.RedisRepositoryAutoConfiguration
+com.github.tkasozi.MetricsEndpointAutoConfiguration
+com.github.tkasozi.ResourceAutoConfiguration
