@@ -21,7 +21,8 @@ description = 'el4j-observability'
 sourceCompatibility = '17'
 
 ext {
-    nexusUsername = System.getenv('MAVEN_USERNAME')
+    nexusUsername = "tkasozi"
+//    nexusUsername = System.getenv('MAVEN_USERNAME')
     nexusPassword = System.getenv('MAVEN_PASSWORD')
 }
 
