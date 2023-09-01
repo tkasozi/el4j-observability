@@ -14,7 +14,7 @@ plugins {
     id 'name.remal.sonarlint' version '3.3.5'
 }
 
-group = 'org.el4j.observability'
+group = 'com.github.tkasozi'
 version = "${System.env.BUILD_VERSION?:'0.0.1-SNAPSHOT'}"
 description = 'el4j-observability'
 
@@ -158,8 +158,6 @@ tasks.withType(AbstractArchiveTask) {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-
             versionMapping {
                 usage('java-api') {
                     fromResolutionOf('runtimeClasspath')
@@ -170,7 +168,7 @@ publishing {
             }
             pom {
                 name = 'Event logging and observability'
-                description = 'Implements logging, tracing, and metrics'
+                description = 'Observability: Logs, metrics, traces persisted and accessed along side your application'
 //                url = 'http://www.example.com/library'
 //                properties = [
 //                        myProp: "value",
@@ -182,6 +180,7 @@ publishing {
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
+
                 developers {
                     developer {
                         id = 'talikk'
@@ -189,10 +188,11 @@ publishing {
                         email = 'talik.aziizi@gmail.com'
                     }
                 }
+
                 scm {
-                    connection = 'scm:git:git://github.com/el4j.git'
-                    developerConnection = 'scm:git:ssh://github.com/el4j.git'
-                    url = 'https://github.com/tkasozi/el4j.git'
+                    connection = 'scm:git:git://github.com/tkasozi/el4j-observability.git'
+                    developerConnection = 'scm:git:ssh://github.com:tkasozi/el4j-observability.git'
+                    url = 'https://github.com/tkasozi/el4j-observability/tree/main'
                 }
             }
         }
