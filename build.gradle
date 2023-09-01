@@ -169,11 +169,6 @@ publishing {
             pom {
                 name = 'Event logging and observability'
                 description = 'Observability: Logs, metrics, traces persisted and accessed along side your application'
-//                url = 'http://www.example.com/library'
-//                properties = [
-//                        myProp: "value",
-//                        "prop.with.dots": "anotherValue"
-//                ]
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
