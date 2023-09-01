@@ -172,6 +172,7 @@ publishing {
             }
             println "---**********************************---"
             println "1. ${System.env.GITHUB_REF_NAME}"
+            println "---->>>1. ${nexusUsername}"
             println "2. " + System.getenv("GITHUB_REF_NAME")
             println "**2. " + System.getenv("secrets")
             println "1. " + System.getenv()
@@ -182,6 +183,7 @@ publishing {
             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
             credentials {
                 username nexusUsername
+//                username nexusUsername
                 password nexusPassword
             }
         }
