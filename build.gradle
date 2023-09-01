@@ -161,13 +161,13 @@ publishing {
             name 'staging'
             url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
             credentials {
-                username "${System.env.OSSRH_USERNAME}"
-                password "${System.env.OSSRH_PASSWORD}"
+                username "${System.env.MAVEN_USERNAME}"
+                password "${System.env.MAVEN_PASSWORD}"
             }
             println "---**********************************---"
             println "1. ${System.env.GITHUB_REF_NAME}"
             println "2. " + System.getenv("GITHUB_REF_NAME")
-            println "**2. " + System.getenv("OSSRH_USERNAME")
+            println "**2. " + System.getenv("secrets")
             println "1. " + System.getenv()
         }
 
@@ -175,8 +175,8 @@ publishing {
             name 'snapshots'
             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
             credentials {
-                username "${System.env.OSSRH_USERNAME}"
-                password "${System.env.OSSRH_PASSWORD}"
+                username "${System.env.MAVEN_USERNAME}"
+                password "${System.env.MAVEN_PASSWORD}"
             }
         }
 
