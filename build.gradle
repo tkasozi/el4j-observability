@@ -183,7 +183,6 @@ publishing {
             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
             credentials {
                 username nexusUsername
-//                username nexusUsername
                 password nexusPassword
             }
         }
