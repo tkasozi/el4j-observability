@@ -156,6 +156,26 @@ tasks.withType(AbstractArchiveTask) {
 }
 
 publishing {
+    repositories {
+        maven {
+            name 'staging'
+            url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username "${System.env.MAVEN_USERNAME}"
+                password "${System.env.MAVEN_PASSWORD}"
+            }
+        }
+
+        maven {
+            name 'snapshots'
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/"'
+            credentials {
+                username "${System.env.MAVEN_USERNAME}"
+                password "${System.env.MAVEN_PASSWORD}"
+            }
+        }
+
+    }
     publications {
         mavenJava(MavenPublication) {
             versionMapping {
