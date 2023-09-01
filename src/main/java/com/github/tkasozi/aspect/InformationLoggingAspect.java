@@ -43,7 +43,7 @@ public class InformationLoggingAspect {
 	 * @return The object that was timed.
 	 * @throws Throwable Expected exception.
 	 */
-	@Around("@within(annotation.com.github.tkasozi.TimeProfile)")
+	@Around("@within(com.github.tkasozi.annotation.TimeProfile)")
 	public Object logExecutionTimeType(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		final long start = System.currentTimeMillis();
 
@@ -68,7 +68,7 @@ public class InformationLoggingAspect {
 	 * @return The object that was timed.
 	 * @throws Throwable Expected exception.
 	 */
-	@Around("@annotation(annotation.com.github.tkasozi.TimeProfile)")
+	@Around("@annotation(com.github.tkasozi.annotation.TimeProfile)")
 	public Object logExecutionTimeMethod(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		final long start = System.currentTimeMillis();
 
