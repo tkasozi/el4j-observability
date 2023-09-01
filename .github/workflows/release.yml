@@ -26,12 +26,6 @@ jobs:
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         with:
           arguments: build
-#      - name: Create release
-#        uses: ncipollo/release-action@v1
-#        with:
-#          allowUpdates: true
-#          artifacts: "${{ github.workspace }}/target/*.jar"
-#          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to the Maven Central Repository
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         with:
