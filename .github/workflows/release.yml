@@ -1,9 +1,8 @@
 name: release and push to central
 on:
   push:
-    branches: [ "path-3" ]
-#    tags:
-#      - '*'
+    tags:
+      - '*'
 jobs:
   publish:
     runs-on: ubuntu-latest
