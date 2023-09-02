@@ -217,7 +217,7 @@ signing {
     sign configurations.archives
     sign publishing.publications.mavenJava
 
-    String signingKeyId = System.getenv("ORG_GRADLE_PROJECT_signingKeyId")
+    String signingKeyId = System.getenv("signingKeyId")
     String signingKey = System.getenv("signingKey")
     String signingPassword = System.getenv("signingPassword")
 
