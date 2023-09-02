@@ -32,8 +32,8 @@ jobs:
           #          staging
           ORG_GRADLE_PROJECT_stagingUsername: ${{ secrets.OSSRH_USERNAME }}
           ORG_GRADLE_PROJECT_stagingPassword: ${{ secrets.OSSRH_TOKEN }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyId: 3EE3EB8A
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKeyId: 3EE3EB8A
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          ORG_GRADLE_PROJECT_signingKeyPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
         with:
           arguments: publish
