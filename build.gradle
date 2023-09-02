@@ -208,11 +208,6 @@ publishing {
         }
 }
 
-//signing {
-//    sign configurations.archives
-//    sign publishing.publications.mavenJava
-//}
-
 signing {
     sign configurations.archives
     sign publishing.publications.mavenJava
@@ -220,10 +215,6 @@ signing {
     String signingKeyId = findProperty("signingKeyId")
     String signingKey = findProperty("signingKey")
     String signingPassword = findProperty("signingKeyPassword")
-
-    println signingKeyId
-    println signingKey
-    println signingPassword
 
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
