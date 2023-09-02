@@ -217,12 +217,13 @@ signing {
     sign configurations.archives
     sign publishing.publications.mavenJava
 
-    String signingKeyId = System.getenv("signingKeyId")
-    String signingKey = System.getenv("signingKey")
-    String signingPassword = System.getenv("signingPassword")
+    String signingKeyId = findProperty("signingKeyId")
+    String signingKey = findProperty("signingKey")
+    String signingPassword = findProperty("signingKeyPassword")
 
     println signingKeyId
     println signingKey
+    println signingPassword
 
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
