@@ -221,6 +221,9 @@ signing {
     String signingKey = System.getenv("signingKey")
     String signingPassword = System.getenv("signingPassword")
 
+    println signingKeyId
+    println signingKey
+
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
