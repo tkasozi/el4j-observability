@@ -4,6 +4,8 @@ plugins {
     id 'org.springframework.boot' version '3.1.2'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
+    id 'io.codearte.nexus-staging' version '0.30.0'
     id 'pmd' // performs quality checks on your project's Java source files using PMD and generates reports from these checks
     id 'jacoco'
     id 'com.github.spotbugs' version '5.1.0'
@@ -15,7 +17,7 @@ plugins {
 }
 
 group = 'io.github.tkasozi'
-version = "${System.env.BUILD_VERSION?:'0.0.1-SNAPSHOT'}"
+version = "${System.env.GITHUB_REF_NAME?:'0.0.1-SNAPSHOT'}"
 description = 'el4j-observability'
 
 sourceCompatibility = '17'
@@ -156,43 +158,68 @@ tasks.withType(AbstractArchiveTask) {
 }
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
+        repositories {
+            maven {
+                name 'staging'
+                credentials(org.gradle.api.credentials.PasswordCredentials)
+                url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
             }
-            pom {
-                name = 'Event logging and observability'
-                description = 'Observability: Logs, metrics, traces persisted and accessed along side your application'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
                     }
                 }
 
-                developers {
-                    developer {
-                        id = 'talikk'
-                        name = 'Talik Kasozi'
-                        email = 'talik.aziizi@gmail.com'
-                    }
-                }
+                pom {
+                    name = "Event logging and observability"
+                    description = "Observability: Logs, metrics, traces persisted and accessed along side your application"
+                    url = "https://tkasozi.github.io/el4j-observability/"
 
-                scm {
-                    connection = 'scm:git:git://github.com/tkasozi/el4j-observability.git'
-                    developerConnection = 'scm:git:ssh://github.com:tkasozi/el4j-observability.git'
-                    url = 'https://github.com/tkasozi/el4j-observability/tree/main'
+                    licenses {
+                        license {
+                            name = "The Apache License, Version 2.0"
+                            url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = "tkasozi"
+                            name = "Talik Kasozi"
+                            email = 'talik.aziizi@gmail.com'
+                        }
+                    }
+
+                    scm {
+                        connection = 'scm:git:git://github.com/tkasozi/el4j-observability.git'
+                        developerConnection = 'scm:git:ssh://github.com:tkasozi/el4j-observability.git'
+                        url = 'https://github.com/tkasozi/el4j-observability/tree/main'
+                    }
                 }
             }
         }
-    }
 }
+
+signing {
+    sign configurations.archives
+    sign publishing.publications.mavenJava
+
+    String signingKeyId = findProperty("signingKeyId")
+    String signingKey = findProperty("signingKey")
+    String signingPassword = findProperty("signingKeyPassword")
+
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+}
+
+publishMavenJavaPublicationToStagingRepository.dependsOn signArchives
 
 assemble.doLast {
     project.jar.outputs.allOutputFiles.each { file ->

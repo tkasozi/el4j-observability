@@ -3,6 +3,7 @@ target/
 build/
 
 .gradle/
+**/*.gpg
 
 src/main/resources/META-INF/el4j-logger/
 ui/node_modules/
