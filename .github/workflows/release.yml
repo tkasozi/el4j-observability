@@ -37,7 +37,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingKeyPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 #        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         run: |
-          echo env
+          echo "$ORG_GRADLE_PROJECT_signingKeyId"
           ./gradlew assemble publish
 #        with:
 #          arguments: publish
