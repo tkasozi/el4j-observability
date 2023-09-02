@@ -208,13 +208,19 @@ publishing {
         }
 }
 
+//signing {
+//    sign configurations.archives
+//    sign publishing.publications.mavenJava
+//}
+
 signing {
     sign configurations.archives
     sign publishing.publications.mavenJava
-    String signingKeyId = findProperty("signingKeyId")
-    String signingKey = findProperty("signingKey")
-    String signingPassword = findProperty("signingPassword")
-    println(signingKeyId ", " signingKey ", " findProperty("ORG_GRADLE_PROJECT_signingKeyId"))
+
+    String signingKeyId = System.getenv("signingKeyId")
+    String signingKey = System.getenv("signingKey")
+    String signingPassword = System.getenv("signingPassword")
+
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
