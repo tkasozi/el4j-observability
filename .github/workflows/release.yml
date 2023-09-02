@@ -27,6 +27,7 @@ jobs:
 #          server-id: ossrh
 #          server-username: ${{ secrets.OSSRH_USERNAME }}
 #          server-password: ${{ secrets.OSSRH_TOKEN }}
+#          TODO- use a diff var for this
 #          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
 #          gpg-passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 #      - name: build artifact
@@ -34,7 +35,7 @@ jobs:
 #        with:
 #          arguments: build
       - name: Publish to the Maven Central Repository
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+#        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         run: |
           echo env
           ./gradlew assemble publish
