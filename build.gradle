@@ -211,6 +211,11 @@ publishing {
 signing {
     sign configurations.archives
     sign publishing.publications.mavenJava
+    String signingKeyId = findProperty("signingKeyId")
+    String signingKey = findProperty("signingKey")
+    String signingPassword = findProperty("signingPassword")
+    println(signingKeyId ", " signingKey ", " findProperty("ORG_GRADLE_PROJECT_signingKeyId"))
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
 publishMavenJavaPublicationToStagingRepository.dependsOn signArchives
