@@ -11,13 +11,6 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
-        env:
-          #          staging
-          ORG_GRADLE_PROJECT_stagingUsername: ${{ secrets.OSSRH_USERNAME }}
-          ORG_GRADLE_PROJECT_stagingPassword: ${{ secrets.OSSRH_TOKEN }}
-          ORG_GRADLE_PROJECT_signingKeyId: 3EE3EB8A
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          ORG_GRADLE_PROJECT_signingKeyPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v3
         with:
@@ -35,6 +28,13 @@ jobs:
 #        with:
 #          arguments: build
       - name: Publish to the Maven Central Repository
+        env:
+          #          staging
+          ORG_GRADLE_PROJECT_stagingUsername: ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_stagingPassword: ${{ secrets.OSSRH_TOKEN }}
+          ORG_GRADLE_PROJECT_signingKeyId: 3EE3EB8A
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          ORG_GRADLE_PROJECT_signingKeyPassword: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 #        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
         run: |
           echo env
