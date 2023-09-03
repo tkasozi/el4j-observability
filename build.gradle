@@ -5,7 +5,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
-    id 'pmd' // performs quality checks on your project's Java source files using PMD and generates reports from these checks
+    id 'pmd'
     id 'jacoco'
     id 'com.github.spotbugs' version '5.1.0'
     id 'at.zierler.yamlvalidator' version '1.5.0'
@@ -49,27 +49,11 @@ java {
 dependencies {
     bom platform(SpringBootPlugin.BOM_COORDINATES)
 
-    compileOnly 'org.springframework.data:spring-data-commons'
-    compileOnly 'org.springframework.boot:spring-boot-starter-actuator'
     compileOnly 'org.springframework.boot:spring-boot-starter-security'
-    compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
     compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
-    compileOnly 'org.springframework.data:spring-data-jpa'
-    compileOnly 'org.springframework.data:spring-data-redis'
-    compileOnly 'org.springframework:spring-core'
-    compileOnly 'org.springframework:spring-context'
-    compileOnly 'org.springframework:spring-context-support'
     compileOnly 'org.springframework.boot:spring-boot-starter-aop'
     compileOnly 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.springframework.boot:spring-boot-starter-webflux'
     compileOnly 'org.springframework.boot:spring-boot-starter-validation'
-
-    compileOnly 'org.apache.maven:maven-plugin-api:3.9.3'
-    compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0'
-    compileOnly 'org.apache.maven:maven-project:2.2.1'
-
-    compileOnly 'com.fasterxml.jackson.core:jackson-core:2.15.2'
-    compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 
     compileOnly 'org.slf4j:log4j-over-slf4j:2.0.7'
 
@@ -78,32 +62,13 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test'){
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
-    testImplementation('org.signal:embedded-redis:0.8.3'){
-        exclude group: 'com.google.guava', module: 'guava' // because: "using version 29.0-jre which has CVE-2020-8908 vulnerability"
-    }
-    testImplementation 'com.google.guava:guava:31.1-jre'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
     testImplementation 'org.springframework.boot:spring-boot-starter-security'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'org.springframework.boot:spring-boot-autoconfigure'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    testImplementation 'org.springframework:spring-core'
-    testImplementation 'org.springframework:spring-context'
-    testImplementation 'org.springframework:spring-context-support'
-    testImplementation 'org.springframework.boot:spring-boot-starter-aop'
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation 'org.springframework.data:spring-data-redis'
+    testImplementation 'org.springframework.boot:spring-boot-starter-aop'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    testImplementation 'org.apache.maven:maven-plugin-api:3.9.3'
-    testImplementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0'
-    testImplementation 'org.apache.maven:maven-project:2.2.1'
-
-    testImplementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
-    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {
