@@ -80,11 +80,6 @@ dependencies {
     }
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
-    testImplementation('org.signal:embedded-redis:0.8.3'){
-        exclude group: 'com.google.guava', module: 'guava' // because: "using version 29.0-jre which has CVE-2020-8908 vulnerability"
-    }
-    testImplementation 'com.google.guava:guava:31.1-jre'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
     testImplementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
