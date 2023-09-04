@@ -14,7 +14,12 @@ import org.springframework.context.annotation.PropertySource;
  * Configures properties and create a property converter.
  */
 @PropertySource({"classpath:el4j-observability-default-logging.properties", "classpath:el4j-observability-extra-logging.properties"})
-@EnableConfigurationProperties({DefaultLoggingProperties.class, ExtraLoggingProperties.class, MetricsProperties.class})
+@EnableConfigurationProperties({
+		DefaultLoggingProperties.class,
+		ExtraLoggingProperties.class,
+		MetricsProperties.class,
+
+})
 @Configuration
 public class DefaultAutoConfiguration {
 	/**

@@ -27,8 +27,14 @@ public class MetricsEndpointAutoConfiguration {
 	@ConditionalOnBean({InformationLoggingAspect.class, ExceptionLoggingAspect.class})
 	@Bean
 	public MetricsEndpoints userMetricsEndpoint(final @NonNull EventLogRepository logRepository) {
-		log.info("Initializing user metrics endpoints");
+		log.info("Initializing metrics endpoints");
 		return new MetricsEndpoints(logRepository);
+	}
+
+	@ConditionalOnBean({InformationLoggingAspect.class, ExceptionLoggingAspect.class})
+	@Bean
+	public UiPerformanceEndpoints uiPerformanceEndpoints(final @NonNull EventLogRepository logRepository) {
+		return new UiPerformanceEndpoints(logRepository);
 	}
 
 	@ConditionalOnBean(SystemCPUMonitoring.class)
@@ -46,12 +52,5 @@ public class MetricsEndpointAutoConfiguration {
 			final @NonNull SystemMemoryMonitoring systemMemoryMonitoring) {
 		log.info("Initializing memory performance endpoints");
 		return new MemoryPerformanceEndpoints(memoryEventRepository, systemMemoryMonitoring);
-	}
-
-	@ConditionalOnBean({InformationLoggingAspect.class, ExceptionLoggingAspect.class})
-	@Bean
-	public UiPerformanceEndpoints uiPerformanceEndpoints(final @NonNull EventLogRepository logRepository) {
-		log.info("Initializing UI metrics tracking endpoints");
-		return new UiPerformanceEndpoints(logRepository);
 	}
 }
