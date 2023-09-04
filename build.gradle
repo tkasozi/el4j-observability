@@ -181,7 +181,7 @@ signing {
     String signingKey = findProperty("signingKey")
     String signingPassword = findProperty("signingKeyPassword")
 
-//    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+   useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
 publishMavenJavaPublicationToStagingRepository.dependsOn signArchives
