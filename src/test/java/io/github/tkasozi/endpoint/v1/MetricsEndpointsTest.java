@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest(properties = "spring.main.allow-bean-definition-overriding=true")
 @AutoConfigureMockMvc
 		/* default */ class MetricsEndpointsTest {
-	public static final String OBSERVER_V_1_UTILIZATION_USER = "/observer/v1/utilization/user";
+	public static final String OBSERVER_V_1_UTILIZATION_USER = "/observer/v1/metrics";
 
 	@Autowired
 	/* default */ MockMvc mvc;
