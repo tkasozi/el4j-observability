@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Handles requests for user generated event.
  */
 //@RestControllerEndpoint(id = "user-metrics") // to create endpoint via "/actuator/user-metrics"
-@RequestMapping("/observer/v1/utilization/user")
+@RequestMapping("/observer/v1/metrics")
 @RequiredArgsConstructor
 @RestController
 @ResponseBody

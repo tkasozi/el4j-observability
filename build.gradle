@@ -25,7 +25,6 @@ repositories {
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
-    mavenLocal()
 }
 
 configurations {
@@ -49,10 +48,12 @@ java {
 dependencies {
     bom platform(SpringBootPlugin.BOM_COORDINATES)
 
-    compileOnly 'org.springframework.boot:spring-boot-starter-security'
+    api 'org.springframework.boot:spring-boot-starter-aop'
+
     compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
-    compileOnly 'org.springframework.boot:spring-boot-starter-aop'
+
     compileOnly 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.boot:spring-boot-starter-security'
     compileOnly 'org.springframework.boot:spring-boot-starter-validation'
 
     compileOnly 'org.slf4j:log4j-over-slf4j:2.0.7'
@@ -64,9 +65,9 @@ dependencies {
     }
 
     testImplementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis'
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-aop'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     testImplementation 'org.springframework.security:spring-security-test'
 }
@@ -78,7 +79,7 @@ test {
     finalizedBy jacocoTestReport
 }
 
-task integrationTest(type: Test) {
+tasks.register('integrationTest', Test) {
     useJUnitPlatform {
         includeTags "integration"
     }
@@ -116,7 +117,7 @@ jar {
 }
 
 // reproducible builds, see https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives
-tasks.withType(AbstractArchiveTask) {
+tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 }
@@ -180,7 +181,7 @@ signing {
     String signingKey = findProperty("signingKey")
     String signingPassword = findProperty("signingKeyPassword")
 
-    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+//    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
 publishMavenJavaPublicationToStagingRepository.dependsOn signArchives

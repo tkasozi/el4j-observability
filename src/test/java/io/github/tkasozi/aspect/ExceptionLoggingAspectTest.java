@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.test.context.TestSecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
@@ -38,7 +39,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 				.build();
 		// @formatter:off
 		try {
-			mockMvc.perform(MockMvcRequestBuilders.get("/test/throwException"));
+			mockMvc.perform(MockMvcRequestBuilders.get("/test/throwException"))
+					.andExpect(MockMvcResultMatchers.status().isBadRequest());
+			Assertions.fail("Should have thrown an exception.");
 		}
 		catch (ServletException exception) {
 			final ArgumentCaptor<EventLog> captor = ArgumentCaptor.forClass(EventLog.class);
