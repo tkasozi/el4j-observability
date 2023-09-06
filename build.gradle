@@ -47,7 +47,7 @@ java {
 dependencies {
     bom platform(SpringBootPlugin.BOM_COORDINATES)
 
-    api 'org.springframework.boot:spring-boot-starter-aop'
+    compileOnly 'org.springframework.boot:spring-boot-starter-aop'
 
     compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
 
@@ -123,12 +123,6 @@ jar {
         attributes("Implementation-Version": version)
         attributes("Implementation-Title": project.name)
     }
-}
-
-// reproducible builds, see https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives
-tasks.withType(AbstractArchiveTask).configureEach {
-    preserveFileTimestamps = false
-    reproducibleFileOrder = true
 }
 
 publishing {

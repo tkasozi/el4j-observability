@@ -15,6 +15,7 @@ repositories {
 dependencies {
    implementation 'io.github.tkasozi:el4j-observability:0.0.1-SNAPSHOT'
 
+   implementation 'org.springframework.boot:spring-boot-starter-aop'
    implementation 'org.springframework.boot:spring-boot-starter-security'
    implementation 'org.springframework.boot:spring-boot-starter-web'
    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
