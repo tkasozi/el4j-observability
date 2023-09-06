@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @ConditionalOnProperty("elf4j.metrics.logging.enabled")
 @Configuration
-@EnableWebMvc
 public class ResourceAutoConfiguration implements WebMvcConfigurer {
 	private final String adminPage;
 
@@ -42,7 +40,6 @@ public class ResourceAutoConfiguration implements WebMvcConfigurer {
 	@Bean
 	public ViewResolver internalResourceViewResolver() {
 		final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		resolver.setPrefix(String.format("/%s/", ResourceUtility.STATIC_RESOURCE_LOCATION));
 		resolver.setSuffix(".html");
 		return resolver;

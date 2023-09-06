@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http
@@ -35,8 +36,7 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
 
         UserDetails peter = User.builder().username("peter")
-                .password(passwordEncoder()
-                        .encode("peter@123"))
+                .password(passwordEncoder().encode("peter@123"))
                 .authorities("USER", "APP_ROLE")
                 .build();
 
