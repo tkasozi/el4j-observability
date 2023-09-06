@@ -6,9 +6,7 @@ import io.github.tkasozi.aspect.InformationLoggingAspect;
 import io.github.tkasozi.property.DefaultLoggingProperties;
 import io.github.tkasozi.repository.redis.EventLogRepository;
 
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,6 @@ import org.springframework.lang.NonNull;
  */
 @AutoConfigureAfter(RedisRepositoryAutoConfiguration.class)
 @ConditionalOnProperty("elf4j.metrics.logging.enabled")
-@ConditionalOnClass(Pointcut.class)
 @EnableAspectJAutoProxy
 @Configuration
 public class AspectAutoConfiguration {

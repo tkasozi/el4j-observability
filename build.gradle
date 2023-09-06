@@ -47,7 +47,7 @@ java {
 dependencies {
     bom platform(SpringBootPlugin.BOM_COORDINATES)
 
-    compileOnly 'org.springframework.boot:spring-boot-starter-aop'
+    api 'org.springframework.boot:spring-boot-starter-aop'
 
     compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
 
