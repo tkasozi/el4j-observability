@@ -1,8 +1,8 @@
-# Event logging For Java: El4j
+## Event logging For Java: El4j
 
-## Setup instructions:
+### Setup instructions:
 
-### Groovy setup example:
+#### Groovy setup example:
 
 ```groovy
 
@@ -16,7 +16,7 @@ dependencies {
 
 ```
 
-### Example using yaml:
+#### Example using yaml:
 
 ```yaml
 elf4j.metrics.adminRole: admin
@@ -35,7 +35,7 @@ elf4j.metrics.logging.extra.packages:
 
 ```
 
-### Example using properties:
+#### Example using properties:
 
 ```properties
 elf4j.metrics.adminRole=admin
@@ -49,7 +49,7 @@ elf4j.metrics.logging.extra.packages[0]=com.experiment.utils,ALL
 elf4j.metrics.logging.extra.packages[1]=com.experiment.internal,ERROR
 ```
 
-### UI metrics collection:
+#### UI metrics collection:
 
 Add the following to your html file.
 

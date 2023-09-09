@@ -142,7 +142,7 @@ publishing {
 
                 pom {
                     name = "Event logging and observability"
-                    description = "Observability: Logs, metrics, traces persisted and accessed along side your application"
+                    description = "Starter for observability: Logs, metrics, traces persisted and accessed along side your application"
                     url = "https://tkasozi.github.io/el4j-observability/"
 
                     licenses {
